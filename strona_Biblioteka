@@ -1,0 +1,63 @@
+<!--nazwa pliku: strona2.php -->
+<!-- powinien się on znajdować w folderze gry w folderze htdocs w programie xampp -->
+
+
+
+
+<?php 
+
+include "strona2loczenie.php";
+
+if(isset($_GET['id'])){
+$ID=$_GET['id'];
+$delete=mysqli_query($conection,"DELETE FROM `dane` WHERE `ID`='$ID'");
+}
+$select="select * from dane";
+$query=mysqli_query($conection,$select);
+
+?>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    
+    <link rel="stylesheet" href="style2.css">
+    <title>Document</title>
+</head>
+<body>
+    <table border="2" cellpadding="0">
+<tr>
+        <th>ID</th>
+        <th>Nazwa</th>
+        <th>KOD</th>
+        <th>Ocena</th>
+        <th>Opis</th>
+        <th>Usun</th>
+</tr>
+<?php 
+$num=mysqli_num_rows($query);
+if($num>0){
+    while ($result=mysqli_fetch_assoc($query)){
+        echo"
+                       <tr>
+              <td>".$result['ID']."</td>
+              <td>".$result['Nazwa']."</td>
+              <td>".$result['KOD']."</td>
+              <td>".$result['Ocena']."</td>
+              <td>".$result['Opis']."</td>
+              <td>
+                 <a href='strona2.php?id=".$result['ID']."' class='btn'>Usun</a>
+              </td>
+            </tr>
+        ";
+    }
+}
+
+?>
+
+</table>
+<a href="strona1.php"class="y"><b>Powrót</b></a>
+</body>
+</html>
