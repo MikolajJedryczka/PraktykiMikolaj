@@ -1,0 +1,77 @@
+<!--nazwa pliku: strona3.php -->
+<!-- powinien się on znajdować w folderze gry w folderze htdocs w programie xampp -->
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style3.css">
+    <title>Dodawanie gier</title>
+</head>
+<body>
+<br>
+
+        <form action="strona3.php" method="post">
+        <br>
+          <label for="Nazwa gry">Nazwa Gry:</label>
+          <input type="text" id="Nazwa" name="nazwa">
+           <br>
+          <label for="Kod gry">Kod Gry:</label>
+          <input type="text" id="Kod" name="kod">
+          <br>
+          <label for="Ocena Gry" class="O">Ocena Gry:</label>
+          <input type="number" id="Ocena" name="ocena">
+          <br> 
+          <label for="Opis gry">Opis Gry:</label>
+          <input type="text" id="Opis" name="opis">
+           <br>
+          <button name="przycisk" class="w">Prześlij</button> 
+      </form>
+      <?php
+        if(isset($_POST["przycisk"])){
+          
+          $servername = "localhost";
+          $username = "root";
+          $password = "";
+          $database = "gry";
+          $conn = mysqli_connect($servername, $username, $password, $database);
+          if (!$conn) {
+            die("Connection failed: " . mysqli_connect_error());
+          }
+          echo "";
+            $nazwa = $_POST["nazwa"];
+            $kod = $_POST["kod"];
+            $ocena = $_POST["ocena"];
+            $opis = $_POST["opis"];
+  
+            $sql = "INSERT INTO `dane`(`Nazwa`, `KOD`, `Ocena`, `Opis`) VALUES ('" . $nazwa . "', '" . 
+            $kod . "', '" . $ocena . "', '" . $opis . "')";
+            if($nazwa!="" and $nazwa!=" " and $kod!="" and $kod!=" " and $opis!="" and $opis!=" "){
+            if($ocena>0 and $ocena<6){
+            if (mysqli_query($conn, $sql)) {
+              echo "Wysłano do Biblioteki";
+            } else {
+              echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+            }
+          }
+
+          else{
+            echo "Ocena musi być od 1 do 5";
+          }
+        }
+        else{
+          echo "Wszyskie pola musza być zapełnione";
+          }
+        
+            mysqli_close($conn);
+        }    
+      
+      
+          ?>
+      <div>
+      <a href="strona1.php"class="y"><b>Powrót</b></a>
+    </div>
+</body>
+</html>
