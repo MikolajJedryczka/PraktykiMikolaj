@@ -1,0 +1,20 @@
+<!--nazwa pliku: strona1.php -->
+<!-- powinien się on znajdować w katalogu gry w folderze htdocs w programie xampp -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style1.css">
+    <title>Strona1</title>
+</head>
+<body>
+    <div>
+        <a href="strona2.php" class="a">Biblioteka</a>
+    </div>
+    <div>
+        <a href="strona3.php" class="b">Dodaj gre</a>
+    </div>
+</body>
+</html>
